@@ -1,7 +1,11 @@
-const main = async () => {
-  const transactionsFactory = await hre.ethers.getContractFactory("Transactions");
-  const transactionsContract = await transactionsFactory.deploy();
 
+const main = async () => {
+
+  const addresses = await hre.ethers.getSigners();
+  console.log(addresses[0].address, "addresses")
+
+  const transactionsFactory = await hre.ethers.getContractFactory("ION_TEST");
+  const transactionsContract = await transactionsFactory.deploy(addresses[0].address);
   await transactionsContract.deployed();
 
   console.log("Transactions address: ", transactionsContract.address);
